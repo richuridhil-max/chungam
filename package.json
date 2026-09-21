@@ -1,20 +1,6 @@
-﻿{
-  "name": "lumiere-3d-herosection",
+{
+  "name": "chungam",
   "version": "1.0.0",
-  "description": "Lumière Haute Joaillerie - 3D Video Hero Section Scroll Animation",
-  "main": "index.html",
-  "scripts": {
-    "dev": "powershell -ExecutionPolicy Bypass -File ./serve.ps1 -Port 3000",
-    "start": "powershell -ExecutionPolicy Bypass -File ./serve.ps1 -Port 3000",
-    "preview": "powershell -ExecutionPolicy Bypass -File ./serve.ps1 -Port 3000"
-  },
-  "keywords": [
-    "3d",
-    "scroll-animation",
-    "canvas",
-    "herosection",
-    "luxury"
-  ],
-  "author": "Chungam",
-  "license": "MIT"
+  "private": true,
+  "description": "Lumiere Haute Joaillerie 3D Scroll Experience"
 }
