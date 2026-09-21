@@ -10,7 +10,8 @@
   const TOTAL_FRAMES = 300;
   const FRAME_DIR = 'frames';
   const FRAME_PREFIX = 'ezgif-frame-';
-  const FRAME_EXT = '.png';
+  const FRAME_EXT = '.jpg';
+  const MIN_FRAMES_TO_START = 5;
 
   // --- DOM ELEMENTS ---
   const preloader = document.getElementById('preloader');
@@ -37,62 +38,100 @@
   }
 
   function preloadImages() {
-    return new Promise((resolve) => {
-      // First load Frame 1 immediately
-      const firstImg = new Image();
-      firstImg.src = getFramePath(0);
-      frames[0] = firstImg;
+    // 1. Immediately load Frame 1
+    const firstImg = new Image();
+    firstImg.src = getFramePath(0);
+    frames[0] = firstImg;
 
-      firstImg.onload = () => {
+    firstImg.onload = () => {
+      loadedCount++;
+      renderFrame(0);
+      updateLoader();
+
+      // Launch smart priority download queue
+      startSmartLoadingQueue();
+    };
+
+    firstImg.onerror = () => {
+      // Fallback
+      startSmartLoadingQueue();
+    };
+
+    // Safety timeout: Never let preloader block user for more than 1.5 seconds
+    setTimeout(() => {
+      if (!isLoaded) {
+        onAllLoaded();
+      }
+    }, 1500);
+  }
+
+  function startSmartLoadingQueue() {
+    // Priority order:
+    // 1. First 10 frames (for immediate smooth scroll)
+    // 2. Keyframes across the full sequence (every 5th frame: 15, 20, 25... 295)
+    // 3. All remaining in-between frames
+    const loadOrder = [];
+    const added = new Set();
+    added.add(0);
+
+    for (let i = 1; i <= 10 && i < TOTAL_FRAMES; i++) {
+      loadOrder.push(i);
+      added.add(i);
+    }
+
+    for (let i = 15; i < TOTAL_FRAMES; i += 5) {
+      if (!added.has(i)) {
+        loadOrder.push(i);
+        added.add(i);
+      }
+    }
+
+    for (let i = 1; i < TOTAL_FRAMES; i++) {
+      if (!added.has(i)) {
+        loadOrder.push(i);
+        added.add(i);
+      }
+    }
+
+    const CONCURRENCY = 6;
+    let nextQueueIdx = 0;
+
+    function loadNext() {
+      if (nextQueueIdx >= loadOrder.length) return;
+      const frameIdx = loadOrder[nextQueueIdx++];
+      const img = new Image();
+      img.src = getFramePath(frameIdx);
+      frames[frameIdx] = img;
+
+      img.onload = () => {
         loadedCount++;
-        renderFrame(0); // Draw immediate preview
         updateLoader();
-
-        // Load the remaining 299 images concurrently in batches
-        let completed = 1;
-        const total = TOTAL_FRAMES;
-
-        for (let i = 1; i < total; i++) {
-          const img = new Image();
-          img.src = getFramePath(i);
-          frames[i] = img;
-
-          img.onload = () => {
-            loadedCount++;
-            completed++;
-            updateLoader();
-            if (completed >= total) {
-              onAllLoaded();
-              resolve();
-            }
-          };
-
-          img.onerror = () => {
-            console.warn(`Frame ${i + 1} failed to load, falling back to neighbor.`);
-            completed++;
-            if (completed >= total) {
-              onAllLoaded();
-              resolve();
-            }
-          };
+        // Repaint if the user is currently viewing this frame or adjacent frame
+        if (Math.abs(Math.round(currentFrame) - frameIdx) <= 2) {
+          renderFrame(Math.round(currentFrame), true);
         }
+        loadNext();
       };
 
-      firstImg.onerror = () => {
-        console.error('Failed to load frame 1 from: ' + firstImg.src);
-        // Fallback or retry
+      img.onerror = () => {
+        loadedCount++;
+        loadNext();
       };
-    });
+    }
+
+    for (let c = 0; c < CONCURRENCY; c++) {
+      loadNext();
+    }
   }
 
   function updateLoader() {
-    const pct = Math.round((loadedCount / TOTAL_FRAMES) * 100);
+    const pct = Math.min(100, Math.round((loadedCount / TOTAL_FRAMES) * 100));
     if (progressBar) progressBar.style.width = `${pct}%`;
     if (loaderPercent) loaderPercent.textContent = `${pct}%`;
     if (loaderFrames) loaderFrames.textContent = `${loadedCount} / ${TOTAL_FRAMES} Frames`;
 
-    // Once we have at least 25% loaded or frame 1 ready, if loading takes too long, we can dismiss preloader
-    if (loadedCount >= TOTAL_FRAMES && !isLoaded) {
+    // Dismiss preloader as soon as the first few frames are ready
+    if (loadedCount >= MIN_FRAMES_TO_START && !isLoaded) {
       onAllLoaded();
     }
   }
@@ -104,7 +143,7 @@
       preloader.classList.add('fade-out');
       initCanvasSize();
       renderFrame(0);
-    }, 400);
+    }, 200);
   }
 
   // --- 2. CANVAS RENDERING ENGINE (ASPECT-RATIO COVER) ---
@@ -118,21 +157,22 @@
     renderFrame(Math.round(currentFrame));
   }
 
-  function renderFrame(index) {
+  function renderFrame(index, force) {
     const clampedIndex = Math.max(0, Math.min(TOTAL_FRAMES - 1, index));
-    if (clampedIndex === lastDrawnFrame && !arguments[1]) return;
+    if (clampedIndex === lastDrawnFrame && !force) return;
 
     // Find nearest loaded frame if current frame is not yet complete
     let img = frames[clampedIndex];
     if (!img || !img.complete || img.naturalWidth === 0) {
-      // Find closest loaded image
-      for (let offset = 1; offset < 20; offset++) {
-        if (frames[clampedIndex - offset] && frames[clampedIndex - offset].complete) {
-          img = frames[clampedIndex - offset];
+      for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+        const prev = clampedIndex - offset;
+        const next = clampedIndex + offset;
+        if (prev >= 0 && frames[prev] && frames[prev].complete && frames[prev].naturalWidth > 0) {
+          img = frames[prev];
           break;
         }
-        if (frames[clampedIndex + offset] && frames[clampedIndex + offset].complete) {
-          img = frames[clampedIndex + offset];
+        if (next < TOTAL_FRAMES && frames[next] && frames[next].complete && frames[next].naturalWidth > 0) {
+          img = frames[next];
           break;
         }
       }
