@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMIÈRE | Haute Joaillerie 3D Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <div class="brand-crest">✦</div>
+      <h2 class="preloader-brand">ATELIER LUMIÈRE</h2>
+      <p class="preloader-sub">Preparing 3D Haute Joaillerie Experience</p>
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div class="preloader-meta">
+        <span id="loader-percent" class="loader-percent">0%</span>
+        <span id="loader-frames" class="loader-frames">0 / 300 Frames</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-symbol">❖</span>
+        <span class="logo-text">LUMIÈRE</span>
+        <span class="logo-tag">ATELIER</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#hero-container" class="nav-link active">Experience</a>
+        <a href="#collection" class="nav-link">Collection</a>
+        <a href="#atelier-bespoke" class="nav-link">Bespoke Atelier</a>
+        <a href="#specifications" class="nav-link">Specifications</a>
+        <a href="#gemology" class="nav-link">Gemology</a>
+        <a href="#craftsmanship" class="nav-link">Craftsmanship</a>
+        <a href="#sizing-care" class="nav-link">Sizing & Care</a>
+        <a href="#concierge" class="nav-link">Concierge</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="currency-dropdown-wrap">
+          <label for="currency-select" class="sr-only">Currency</label>
+          <select id="currency-select" class="currency-select" title="Change Currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="INR">INR (₹)</option>
+            <option value="AED">AED (د.إ)</option>
+          </select>
+        </div>
+
+        <a href="https://wa.me/971501234567?text=Hello%20Atelier%20Lumi%C3%A8re%2C%20I%20would%20like%20to%20consult%20with%20a%20Private%20Jeweller." target="_blank" rel="noopener noreferrer" class="nav-social-btn whatsapp" title="Chat with Private Jeweller on WhatsApp" aria-label="WhatsApp VIP Concierge">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.031 2c-5.513 0-9.99 4.477-9.99 9.99 0 1.76.459 3.477 1.332 4.996L2.05 22l5.176-1.358a9.96 9.96 0 0 0 4.805 1.233h.004c5.513 0 9.99-4.477 9.99-9.99A9.997 9.997 0 0 0 12.031 2zm0 18.283a8.28 8.28 0 0 1-4.22-1.151l-.303-.18-3.136.822.837-3.057-.197-.314a8.27 8.27 0 0 1-1.272-4.413c0-4.57 3.719-8.289 8.291-8.289 2.215 0 4.297.863 5.862 2.43a8.243 8.243 0 0 1 2.427 5.86c-.001 4.572-3.72 8.292-8.288 8.292zm4.542-6.205c-.249-.125-1.474-.727-1.703-.81-.228-.083-.395-.125-.561.125-.166.249-.644.81-.789.976-.145.166-.291.187-.54.062-.249-.125-1.052-.388-2.003-1.237-.74-.66-1.24-1.476-1.385-1.725-.145-.249-.015-.384.11-.508.112-.112.249-.291.374-.436.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.436-.062-.125-.561-1.35-.769-1.85-.202-.488-.408-.422-.561-.43-.145-.008-.312-.01-.478-.01s-.436.062-.664.312c-.228.249-.873.852-.873 2.078s.893 2.41 1.018 2.577c.125.166 1.758 2.685 4.26 3.766.595.257 1.06.411 1.423.526.598.19 1.142.163 1.572.099.479-.072 1.474-.602 1.682-1.184.208-.582.208-1.08.145-1.184-.063-.104-.229-.166-.478-.291z"/></svg>
+        </a>
+
+        <button id="nav-vault-btn" class="nav-vault-btn" title="View Private Vault / Wishlist">
+          <span class="vault-icon">⚜</span>
+          <span class="vault-text">Vault</span>
+          <span id="vault-count-badge" class="vault-count-badge">0</span>
+        </button>
+
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCROLL PROGRESS INDICATOR (TOP) -->
+  <div id="page-progress" class="page-progress"></div>
+
+  <!-- 3D VIDEO SCROLL HERO CONTAINER -->
+  <div id="hero-container" class="hero-scroll-track">
+    <div class="hero-sticky-viewport">
+      
+      <!-- Interactive 3D Canvas -->
+      <canvas id="hero-canvas"></canvas>
+
+      <!-- Atmospheric Ambient Lighting Gradient -->
+      <div class="canvas-ambient-vignette"></div>
+
+
+
+      <!-- Subtle Scroll Cue -->
+      <div class="hero-clean-scroll-cue">
+        <span class="cue-label">SCROLL TO EXPLORE 3D CREATION</span>
+        <div class="cue-mouse"><div class="cue-wheel"></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POST-HERO SPECIFICATIONS & CRAFTSMANSHIP SECTION -->
+  <main class="site-main">
+    
+    <!-- CURATED JEWELLERY COLLECTION & PRICING SECTION -->
+    <section id="collection" class="content-section collection-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">HAUTE JOAILLERIE ARCHIVE</span>
+          <h2 class="section-title">The Masterpiece Collection</h2>
+          <p class="section-lead">Every creation is an individual masterwork, pairing conflict-free ethical gemstones of extraordinary optic clarity with hand-forged precious metals.</p>
+        </div>
+
+        <!-- Collection Filters & Controls Bar -->
+        <div class="collection-controls-bar">
+          <div class="category-tabs" id="category-tabs">
+            <button type="button" class="cat-pill active" data-category="all">All Creations (10)</button>
+            <button type="button" class="cat-pill" data-category="necklaces">Colliers & Necklaces</button>
+            <button type="button" class="cat-pill" data-category="rings">Solitaires & Rings</button>
+            <button type="button" class="cat-pill" data-category="earrings">Earrings & Drops</button>
+            <button type="button" class="cat-pill" data-category="bracelets">Bangles & Cuffs</button>
+          </div>
+
+          <div class="collection-search-sort">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="collection-search" placeholder="Search by gem, cut, or name..." autocomplete="off">
+              <button type="button" id="search-clear-btn" class="search-clear-btn hidden" aria-label="Clear search">&times;</button>
+            </div>
+
+            <div class="sort-select-wrap">
+              <label for="collection-sort" class="sort-label">Sort:</label>
+              <select id="collection-sort" class="collection-sort-select">
+                <option value="featured">Featured Masterpieces</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="carats">Carat Weight: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Collection Grid -->
+        <div id="collection-grid" class="collection-grid" aria-live="polite">
+          <!-- Dynamically populated via script.js with rich product cards -->
+        </div>
+
+        <div id="collection-empty" class="collection-empty hidden">
+          <div class="empty-crest">✦</div>
+          <h3>No creations match your search</h3>
+          <p>Try refining your search keyword or selecting a different category filter.</p>
+          <button type="button" id="btn-reset-filters" class="btn-secondary-large">Reset All Filters</button>
+        </div>
+
+        <!-- Atelier Guarantee Badges -->
+        <div class="collection-perks-bar">
+          <div class="perk-item">
+            <span class="perk-icon">⚜️</span>
+            <div class="perk-text">
+              <strong>BIS 916 & 18K Hallmarked</strong>
+              <span>100% Certified metallurgical gold purity</span>
+            </div>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon">💎</span>
+            <div class="perk-text">
+              <strong>GIA & SSEF Authenticated</strong>
+              <span>Natural conflict-free earth gemstones</span>
+            </div>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon">🛡️</span>
+            <div class="perk-text">
+              <strong>100% Insured Delivery</strong>
+              <span>Discreet armoured vault-to-door transit</span>
+            </div>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon">⚖️</span>
+            <div class="perk-text">
+              <strong>Lifetime Buyback & Exchange</strong>
+              <span>Full valuation equity preservation</span>
+            </div>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon">✨</span>
+            <div class="perk-text">
+              <strong>Custom Sizing & Care</strong>
+              <span>Complimentary sizing, engraving & audits</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE BESPOKE ATELIER STUDIO & PRICE ESTIMATOR -->
+    <section id="atelier-bespoke" class="content-section dark-accent bespoke-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">ATELIER BESPOKE STUDIO</span>
+          <h2 class="section-title">Design Your One-of-a-Kind Masterpiece</h2>
+          <p class="section-lead">Step into the shoes of our Head Jeweller. Select your precious metal alloy, certified gemstone, cut geometry, and carat scale to observe real-time atelier pricing and design visualization.</p>
+        </div>
+
+        <div class="bespoke-studio-layout">
+          <!-- Left: Configurator Controls -->
+          <div class="bespoke-controls-panel">
+            
+            <!-- 1. Metal Selection -->
+            <div class="config-group">
+              <label class="config-label">
+                <span class="step-num">01</span>
+                Precious Metal Alloy
+                <span id="selected-metal-name" class="selected-indicator">18K White Gold</span>
+              </label>
+              <div class="metal-swatches-grid" id="metal-options">
+                <button type="button" class="swatch-btn active" data-metal="white-gold" data-name="18K White Gold" data-rate="2800" data-color="#e8e8e8">
+                  <span class="swatch-circle metal-white-gold"></span>
+                  <span class="swatch-text">18K White Gold</span>
+                </button>
+                <button type="button" class="swatch-btn" data-metal="yellow-gold" data-name="18K Yellow Gold" data-rate="2600" data-color="#eac875">
+                  <span class="swatch-circle metal-yellow-gold"></span>
+                  <span class="swatch-text">18K Yellow Gold</span>
+                </button>
+                <button type="button" class="swatch-btn" data-metal="rose-gold" data-name="18K Rose Gold" data-rate="2700" data-color="#e8a892">
+                  <span class="swatch-circle metal-rose-gold"></span>
+                  <span class="swatch-text">18K Rose Gold</span>
+                </button>
+                <button type="button" class="swatch-btn" data-metal="platinum" data-name="950 Platinum" data-rate="3900" data-color="#f2f2f5">
+                  <span class="swatch-circle metal-platinum"></span>
+                  <span class="swatch-text">950 Platinum</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Gemstone Selection -->
+            <div class="config-group">
+              <label class="config-label">
+                <span class="step-num">02</span>
+                Centerpiece Gemstone
+                <span id="selected-gem-name" class="selected-indicator">Madagascar Morganite</span>
+              </label>
+              <div class="gem-options-grid" id="gem-options">
+                <button type="button" class="gem-choice-btn active" data-gem="morganite" data-name="Madagascar Morganite" data-carat-price="3200" data-color="#f7b7a3" data-halo="rgba(247, 183, 163, 0.4)">
+                  <span class="gem-dot" style="background: radial-gradient(circle, #ffe0d6 0%, #f7b7a3 60%, #c47662 100%);"></span>
+                  <div class="gem-info">
+                    <span class="name">Morganite</span>
+                    <span class="origin">Madagascar Rose</span>
+                  </div>
+                </button>
+                <button type="button" class="gem-choice-btn" data-gem="diamond" data-name="D-Flawless Diamond" data-carat-price="14500" data-color="#ffffff" data-halo="rgba(255, 255, 255, 0.6)">
+                  <span class="gem-dot" style="background: radial-gradient(circle, #ffffff 0%, #dff3ff 50%, #9bc2e6 100%);"></span>
+                  <div class="gem-info">
+                    <span class="name">Diamond</span>
+                    <span class="origin">Type IIa Colorless</span>
+                  </div>
+                </button>
+                <button type="button" class="gem-choice-btn" data-gem="emerald" data-name="Colombian Emerald" data-carat-price="9800" data-color="#2de094" data-halo="rgba(45, 224, 148, 0.4)">
+                  <span class="gem-dot" style="background: radial-gradient(circle, #7bf7c0 0%, #1db873 60%, #0d633d 100%);"></span>
+                  <div class="gem-info">
+                    <span class="name">Emerald</span>
+                    <span class="origin">Muzo Colombian</span>
+                  </div>
+                </button>
+                <button type="button" class="gem-choice-btn" data-gem="sapphire" data-name="Ceylon Royal Sapphire" data-carat-price="7600" data-color="#3d7bf5" data-halo="rgba(61, 123, 245, 0.4)">
+                  <span class="gem-dot" style="background: radial-gradient(circle, #7ea9ff 0%, #295bcc 60%, #10266e 100%);"></span>
+                  <div class="gem-info">
+                    <span class="name">Sapphire</span>
+                    <span class="origin">Ceylon Royal Blue</span>
+                  </div>
+                </button>
+                <button type="button" class="gem-choice-btn" data-gem="ruby" data-name="Burmese Pigeon Blood Ruby" data-carat-price="12800" data-color="#e62e5c" data-halo="rgba(230, 46, 92, 0.4)">
+                  <span class="gem-dot" style="background: radial-gradient(circle, #ff6b91 0%, #c21542 60%, #63051c 100%);"></span>
+                  <div class="gem-info">
+                    <span class="name">Ruby</span>
+                    <span class="origin">Burma Crimson</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. Gemstone Cut -->
+            <div class="config-group">
+              <label class="config-label">
+                <span class="step-num">03</span>
+                Facet Geometry & Cut
+                <span id="selected-cut-name" class="selected-indicator">Emerald Step Cut</span>
+              </label>
+              <div class="cut-options-row" id="cut-options">
+                <button type="button" class="cut-pill active" data-cut="emerald" data-name="Emerald Step Cut" data-multiplier="1.0">Emerald Cut</button>
+                <button type="button" class="cut-pill" data-cut="round" data-name="Round Brilliant" data-multiplier="1.15">Round Brilliant</button>
+                <button type="button" class="cut-pill" data-cut="cushion" data-name="Royal Cushion" data-multiplier="1.05">Royal Cushion</button>
+                <button type="button" class="cut-pill" data-cut="pear" data-name="Pear Majestic Drop" data-multiplier="1.08">Pear Drop</button>
+                <button type="button" class="cut-pill" data-cut="oval" data-name="Oval Splendeur" data-multiplier="1.06">Oval Splendeur</button>
+              </div>
+            </div>
+
+            <!-- 4. Carat Weight Slider -->
+            <div class="config-group">
+              <div class="slider-header">
+                <label class="config-label mb-0" for="carat-slider">
+                  <span class="step-num">04</span>
+                  Carat Proportion
+                </label>
+                <span id="carat-display" class="carat-badge">3.50 Carats</span>
+              </div>
+              <input type="range" id="carat-slider" class="luxury-range-slider" min="1.50" max="10.00" step="0.25" value="3.50">
+              <div class="slider-ticks">
+                <span>1.5 ct</span>
+                <span>3.5 ct</span>
+                <span>5.0 ct</span>
+                <span>7.5 ct</span>
+                <span>10.0 ct</span>
+              </div>
+            </div>
+
+            <!-- 5. Setting Architecture -->
+            <div class="config-group">
+              <label class="config-label">
+                <span class="step-num">05</span>
+                Setting Architecture
+                <span id="selected-setting-name" class="selected-indicator">Micro-Pavé Double Halo</span>
+              </label>
+              <div class="setting-grid" id="setting-options">
+                <button type="button" class="setting-btn active" data-setting="halo" data-name="Micro-Pavé Double Halo" data-price="4200">
+                  <span class="setting-title">Pavé Double Halo</span>
+                  <span class="setting-sub">+0.85 ct accent diamonds</span>
+                </button>
+                <button type="button" class="setting-btn" data-setting="cathedral" data-name="Cathedral Solitaire" data-price="2100">
+                  <span class="setting-title">Cathedral Solitaire</span>
+                  <span class="setting-sub">Sleek arched claw prongs</span>
+                </button>
+                <button type="button" class="setting-btn" data-setting="trilogy" data-name="Trilogy Three-Stone" data-price="5800">
+                  <span class="setting-title">Trilogy Three-Stone</span>
+                  <span class="setting-sub">+1.20 ct paired baguettes</span>
+                </button>
+                <button type="button" class="setting-btn" data-setting="bezel" data-name="Art Deco Modern Bezel" data-price="3100">
+                  <span class="setting-title">Art Deco Bezel</span>
+                  <span class="setting-sub">Millgrain bordered rim</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 6. Custom Inscription -->
+            <div class="config-group">
+              <label class="config-label" for="bespoke-engraving">
+                <span class="step-num">06</span>
+                Complimentary Atelier Engraving (Optional)
+              </label>
+              <input type="text" id="bespoke-engraving" class="bespoke-input" placeholder="e.g. Éternité • 2026" maxlength="32">
+            </div>
+
+          </div>
+
+          <!-- Right: Visualizer & Live Valuation Dossier -->
+          <div class="bespoke-preview-panel">
+            
+            <!-- Interactive Visual Card -->
+            <div class="visualizer-box">
+              <div class="visualizer-badge">LIVE FACET & ALLOY SIMULATOR</div>
+              <canvas id="bespoke-canvas" width="460" height="380" class="bespoke-canvas"></canvas>
+              
+              <div class="gem-interactive-prompt">
+                <span>✦ Move cursor / tap canvas to rotate light reflections</span>
+              </div>
+            </div>
+
+            <!-- Real-Time Price & Spec Valuation Card -->
+            <div class="valuation-card">
+              <div class="valuation-top">
+                <div class="valuation-title">
+                  <span class="card-tag">ESTIMATED ATELIER VALUATION</span>
+                  <h3 id="bespoke-summary-title">Madagascar Morganite in 18K White Gold</h3>
+                  <p id="bespoke-summary-cut">Emerald Step Cut • 3.50 Carats • Micro-Pavé Double Halo</p>
+                </div>
+                <div class="valuation-price">
+                  <span class="currency-label">ESTIMATED PRICE</span>
+                  <div id="bespoke-total-price" class="live-price">$18,200</div>
+                  <span class="tax-note">Includes VAT, bespoke salon fitting & insured transport</span>
+                </div>
+              </div>
+
+              <!-- Price Breakdown List -->
+              <div class="valuation-breakdown">
+                <div class="breakdown-row">
+                  <span class="row-label">Selected Precious Metal Casting</span>
+                  <span id="breakdown-metal" class="row-value">$2,800</span>
+                </div>
+                <div class="breakdown-row">
+                  <span class="row-label">Certified Centerpiece Gemstone</span>
+                  <span id="breakdown-gem" class="row-value">$11,200</span>
+                </div>
+                <div class="breakdown-row">
+                  <span class="row-label">Setting Architecture & Accent Diamonds</span>
+                  <span id="breakdown-setting" class="row-value">$4,200</span>
+                </div>
+                <div class="breakdown-row">
+                  <span class="row-label">Atelier Masterwork (~180 Hours Handcraft)</span>
+                  <span class="row-value highlight">Included</span>
+                </div>
+              </div>
+
+              <div class="valuation-actions">
+                <button type="button" id="btn-order-bespoke" class="btn-primary-large w-full">
+                  Commission This Bespoke Creation
+                </button>
+                <button type="button" id="btn-whatsapp-bespoke" class="btn-whatsapp-bespoke w-full">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 2c-5.513 0-9.99 4.477-9.99 9.99 0 1.76.459 3.477 1.332 4.996L2.05 22l5.176-1.358a9.96 9.96 0 0 0 4.805 1.233h.004c5.513 0 9.99-4.477 9.99-9.99A9.997 9.997 0 0 0 12.031 2zm0 18.283a8.28 8.28 0 0 1-4.22-1.151l-.303-.18-3.136.822.837-3.057-.197-.314a8.27 8.27 0 0 1-1.272-4.413c0-4.57 3.719-8.289 8.291-8.289 2.215 0 4.297.863 5.862 2.43a8.243 8.243 0 0 1 2.427 5.86c-.001 4.572-3.72 8.292-8.288 8.292zm4.542-6.205c-.249-.125-1.474-.727-1.703-.81-.228-.083-.395-.125-.561.125-.166.249-.644.81-.789.976-.145.166-.291.187-.54.062-.249-.125-1.052-.388-2.003-1.237-.74-.66-1.24-1.476-1.385-1.725-.145-.249-.015-.384.11-.508.112-.112.249-.291.374-.436.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.436-.062-.125-.561-1.35-.769-1.85-.202-.488-.408-.422-.561-.43-.145-.008-.312-.01-.478-.01s-.436.062-.664.312c-.228.249-.873.852-.873 2.078s.893 2.41 1.018 2.577c.125.166 1.758 2.685 4.26 3.766.595.257 1.06.411 1.423.526.598.19 1.142.163 1.572.099.479-.072 1.474-.602 1.682-1.184.208-.582.208-1.08.145-1.184-.063-.104-.229-.166-.478-.291z"/></svg>
+                  Consult on WhatsApp with Specs
+                </button>
+                <button type="button" id="btn-save-bespoke" class="btn-secondary-large w-full">
+                  ⚜ Save Configuration to Vault
+                </button>
+              </div>
+
+              <div class="bespoke-guarantees">
+                <span>✦ GIA / SSEF Dossier</span>
+                <span>✦ 3D Wax Prototype Included</span>
+                <span>✦ Conflict-Free</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIFICATIONS SECTION -->
+    <section id="specifications" class="content-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-subtitle">SPECIFICATIONS DOSSIER</span>
+          <h2 class="section-title">Anatomy of Exceptional Craft</h2>
+          <p class="section-lead">Every facet, curve, and setting is engineered with micrometer precision to capture and amplify natural light.</p>
+        </div>
+
+        <div class="spec-cards-grid">
+          <div class="spec-card">
+            <div class="card-icon">💎</div>
+            <div class="card-header">
+              <span class="metric-carat">18.52 CT</span>
+              <h3>Primary Gemstone</h3>
+            </div>
+            <p>Natural Octagonal Step-cut Pink Morganite sourced from Madagascar. Unheated and untreated with high optic clarity.</p>
+            <ul class="card-specs-list">
+              <li><span>Clarity:</span> Eye Clean / Loupe Pristine</li>
+              <li><span>Hue:</span> Warm Dawn Rose Peach</li>
+              <li><span>Certification:</span> GIA #829410948</li>
+            </ul>
+          </div>
+
+          <div class="spec-card">
+            <div class="card-icon">✨</div>
+            <div class="card-header">
+              <span class="metric-carat">5.80 TCW</span>
+              <h3>Diamond Architecture</h3>
+            </div>
+            <p>Collection of 342 round brilliant and emerald-shaped accent diamonds seamlessly channel- and micro-prong set.</p>
+            <ul class="card-specs-list">
+              <li><span>Color Grade:</span> D - F (Colorless)</li>
+              <li><span>Clarity:</span> VVS1 - IF</li>
+              <li><span>Cut Grade:</span> Excellent / Triple Ideal</li>
+            </ul>
+          </div>
+
+          <div class="spec-card">
+            <div class="card-icon">⚜️</div>
+            <div class="card-header">
+              <span class="metric-carat">18K WHITE GOLD</span>
+              <h3>Precious Metalwork</h3>
+            </div>
+            <p>Hand-forged palladium-rich white gold alloy offering superior tensile strength, mirror rhodium polish, and hypoallergenic skin feel.</p>
+            <ul class="card-specs-list">
+              <li><span>Finish:</span> High-Mirror Rhodium Dip</li>
+              <li><span>Closure:</span> Concealed Safety Clasp</li>
+              <li><span>Weight:</span> 64.2 Grams Solid 750</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEMOLOGICAL STANDARDS & 4Cs GUIDE -->
+    <section id="gemology" class="content-section gemology-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">THE MAISON STANDARDS</span>
+          <h2 class="section-title">The Art of Gemological Perfection</h2>
+          <p class="section-lead">At Atelier Lumière, our rigorous selection rejects 99.7% of all gem-grade rough. Explore the five pillars that define every certified treasure in our collection.</p>
+        </div>
+
+        <div class="gemology-tabs-container">
+          <div class="gemology-nav-tabs" id="gemology-tabs">
+            <button type="button" class="gem-tab-btn active" data-tab="carat">01. Carat Proportion</button>
+            <button type="button" class="gem-tab-btn" data-tab="color">02. Color Saturation</button>
+            <button type="button" class="gem-tab-btn" data-tab="clarity">03. Loupe Clarity</button>
+            <button type="button" class="gem-tab-btn" data-tab="cut">04. Lapidary Cut</button>
+            <button type="button" class="gem-tab-btn" data-tab="provenance">05. Ethical Provenance</button>
+          </div>
+
+          <div class="gem-tab-panels">
+            
+            <div class="gem-panel active" id="tab-carat">
+              <div class="gem-panel-grid">
+                <div class="panel-content">
+                  <span class="panel-tag">CARAT WEIGHT & PROPORTION</span>
+                  <h3>Weight Harmonized with Scintillation Geometry</h3>
+                  <p>In high joaillerie, carat mass is valuable only when paired with optical geometry. A master lapidary cuts for maximum fire and life, never preserving inactive weight beneath the pavilion. Our stones maximize face-up table brilliance while retaining perfect optical equilibrium.</p>
+                  <div class="gem-stat-grid">
+                    <div class="stat-box">
+                      <span class="num">1.50 ct</span>
+                      <span class="desc">~7.4mm Crown Diameter</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="num">3.50 ct</span>
+                      <span class="desc">~9.8mm Royal Spread</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="num">5.00+ ct</span>
+                      <span class="desc">Museum Investment Grade</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-card-visual">
+                  <div class="visual-badge">GEOMETRIC SPREAD</div>
+                  <div class="scale-visual-diagram">
+                    <div class="gem-circle c1"><span>1.5ct</span></div>
+                    <div class="gem-circle c2"><span>3.5ct</span></div>
+                    <div class="gem-circle c3"><span>5.0ct</span></div>
+                    <div class="gem-circle c4"><span>10ct</span></div>
+                  </div>
+                  <p class="diagram-caption">Millimeter-to-carat crown table distribution ratio</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="gem-panel" id="tab-color">
+              <div class="gem-panel-grid">
+                <div class="panel-content">
+                  <span class="panel-tag">COLOR & CHROMATIC PURITY</span>
+                  <h3>D-F Purest Colorless Diamonds & Unheated Vivid Gemstones</h3>
+                  <p>Diamonds in our creations fall strictly within the D to F colorless spectrum—completely free from nitrogen tint. For colored stones, we select exclusively untreated, unheated specimens: vivid peach-pink Madagascar Morganites, saturated Muzo Colombian Emeralds, and Pigeon Blood Burmese Rubies.</p>
+                  <ul class="panel-specs-list">
+                    <li><strong>Colorless Range:</strong> D, E, F only (Triple Rare Zero Nitrogen Tint)</li>
+                    <li><strong>Fancy Colored Grade:</strong> Fancy Vivid & Deeply Saturated Natural Hue</li>
+                    <li><strong>Thermal Origin:</strong> 100% Unheated Natural Earth Crystallization</li>
+                  </ul>
+                </div>
+                <div class="panel-card-visual">
+                  <div class="visual-badge">CHROMATIC RANGE</div>
+                  <div class="color-swatch-spectrum">
+                    <div class="spectrum-bar"></div>
+                    <div class="spectrum-labels">
+                      <span class="active-grade">D (Colorless)</span>
+                      <span class="active-grade">E</span>
+                      <span class="active-grade">F</span>
+                      <span class="excluded-grade">G+ (Excluded)</span>
+                    </div>
+                  </div>
+                  <p class="diagram-caption">Zero compromise: Atelier Lumière mounts only D-F colorless grades</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="gem-panel" id="tab-clarity">
+              <div class="gem-panel-grid">
+                <div class="panel-content">
+                  <span class="panel-tag">MICROSCOPIC CLARITY</span>
+                  <h3>Flawless to VVS1: Pristine Under 10x Surgical Magnification</h3>
+                  <p>Under surgical stereoscopic magnification, ordinary gems reveal internal stress fractures, feathering, and inclusions. Atelier Lumière selects stones graded Loupe Pristine, Internally Flawless (IF), or VVS1, where inclusions remain invisible even to senior gemologists without lab instruments.</p>
+                  <div class="gem-stat-grid">
+                    <div class="stat-box">
+                      <span class="num">FL / IF</span>
+                      <span class="desc">Internally Flawless</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="num">VVS1</span>
+                      <span class="desc">Loupe Pristine</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="num">100%</span>
+                      <span class="desc">Eye Clean Guarantee</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-card-visual">
+                  <div class="visual-badge">10x MAGNIFICATION AUDIT</div>
+                  <div class="loupe-visual-circle">
+                    <div class="crosshairs"></div>
+                    <div class="gem-sparkle-center">✦</div>
+                    <span class="loupe-label">Apochromatic Doublet</span>
+                  </div>
+                  <p class="diagram-caption">Every piece audited under 40x surgical stereomicroscopy</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="gem-panel" id="tab-cut">
+              <div class="gem-panel-grid">
+                <div class="panel-content">
+                  <span class="panel-tag">PRECISION LAPIDARY</span>
+                  <h3>Triple Excellent Cut, Polish, & 8-Fold Scintillation</h3>
+                  <p>The cut is the only human variable in a gemstone’s splendour. Our lapidaries calibrate every facet angle to within 0.05 degrees. This ensures that 100% of incident light is reflected back through the crown as blinding scintillation, brilliance, and rainbow dispersion.</p>
+                  <ul class="panel-specs-list">
+                    <li><strong>Light Performance:</strong> Total internal reflection with zero light leakage</li>
+                    <li><strong>Hearts & Arrows:</strong> Perfect eight-fold optical symmetry</li>
+                    <li><strong>Girdle Finish:</strong> Laser-inscribed faceted mirror perimeter</li>
+                  </ul>
+                </div>
+                <div class="panel-card-visual">
+                  <div class="visual-badge">RAY-TRACED SCINTILLATION</div>
+                  <div class="ray-tracing-diagram">
+                    <div class="ray-gem-outline"></div>
+                    <div class="light-ray r1"></div>
+                    <div class="light-ray r2"></div>
+                    <div class="light-ray r3"></div>
+                  </div>
+                  <p class="diagram-caption">Total internal reflection angles maximizing optic dispersion</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="gem-panel" id="tab-provenance">
+              <div class="gem-panel-grid">
+                <div class="panel-content">
+                  <span class="panel-tag">ETHICAL STEWARDSHIP</span>
+                  <h3>100% Conflict-Free Mines & Kimberley Process Certification</h3>
+                  <p>Splendour holds no true value without honor. Every rough gem acquired by Maison Lumière is traced directly to artisanal cooperatives and audited mining partners. We strictly uphold fair living wages, environmental remediation, and absolute compliance with the United Nations Kimberley Process.</p>
+                  <div class="gem-stat-grid">
+                    <div class="stat-box">
+                      <span class="num">100%</span>
+                      <span class="desc">Kimberley Process</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="num">18K</span>
+                      <span class="desc">Fairmined Recycled Gold</span>
+                    </div>
+                    <div class="stat-box">
+                      <span class="num">Direct</span>
+                      <span class="desc">Mine-to-Atelier Custody</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-card-visual">
+                  <div class="visual-badge">CHAIN OF CUSTODY</div>
+                  <div class="custody-flow">
+                    <div class="flow-step"><span>01</span> Ethical Mine</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step"><span>02</span> GIA / SSEF</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step"><span>03</span> Atelier Paris</div>
+                  </div>
+                  <p class="diagram-caption">Complete unbroken provenance documentation delivered in dossier</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRAFTSMANSHIP & ATELIER STORY -->
+    <section id="craftsmanship" class="content-section dark-accent">
+      <div class="section-container">
+        <div class="craft-split-layout">
+          <div class="craft-content">
+            <span class="section-subtitle">THE ATELIER PROCESS</span>
+            <h2 class="section-title">Forged by Master Hands Over 280 Hours</h2>
+            <p class="craft-body">
+              Before the first stone is set, master goldsmiths draft three-dimensional wax sculptures to calibrate weight distribution and movement. The necklace breathes with the wearer, moving like liquid gold across the décolletage.
+            </p>
+            <div class="craft-steps">
+              <div class="craft-step">
+                <div class="step-idx">01</div>
+                <div>
+                  <h4>Lapidary Sourcing</h4>
+                  <p>Ethically sourced unheated stones selected from private mine allotments.</p>
+                </div>
+              </div>
+              <div class="craft-step">
+                <div class="step-idx">02</div>
+                <div>
+                  <h4>Micro-Pavé Setting</h4>
+                  <p>Each accent diamond set under 40x stereoscopic surgical microscopes.</p>
+                </div>
+              </div>
+              <div class="craft-step">
+                <div class="step-idx">03</div>
+                <div>
+                  <h4>Kinetic Balancing</h4>
+                  <p>Individually articulated links ensuring smooth contact and comfort.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="craft-feature-card">
+            <div class="gem-badge">ATELIER ARCHIVE</div>
+            <h3>Custom Bespoke Variations</h3>
+            <p>Commission a bespoke edition of this piece customized in platinum, yellow gold, or featuring Burmese Ruby or Colombian Emerald center stones.</p>
+            <a href="#concierge" class="btn-text">Consult Head Jeweller →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JEWELLERY SIZING & ATELIER CARE MASTERCLASS -->
+    <section id="sizing-care" class="content-section sizing-care-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">MAISON SERVICES & GUIDANCE</span>
+          <h2 class="section-title">International Sizing & Jewellery Care</h2>
+          <p class="section-lead">Every creation is sculpted to rest with effortless elegance. Consult our international sizing standards and museum-grade conservation protocols.</p>
+        </div>
+
+        <div class="sizing-care-grid">
+          <!-- Sizing Guide Card -->
+          <div class="sizing-card">
+            <div class="sizing-card-header">
+              <span class="guide-badge">PRECISION FIT</span>
+              <h3>International Ring Sizing Matrix</h3>
+              <p>Complimentary custom tailoring on all commissioned solitaires and bands.</p>
+            </div>
+            <div class="sizing-table-wrap">
+              <table class="luxury-table">
+                <thead>
+                  <tr>
+                    <th>US / Canada</th>
+                    <th>UK / Aus</th>
+                    <th>EU / India</th>
+                    <th>Inside Diam.</th>
+                    <th>Circumference</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>5.0</strong></td>
+                    <td>J 1/2</td>
+                    <td>49 / 9</td>
+                    <td>15.7 mm</td>
+                    <td>49.3 mm</td>
+                  </tr>
+                  <tr>
+                    <td><strong>6.0</strong></td>
+                    <td>M</td>
+                    <td>52 / 12</td>
+                    <td>16.5 mm</td>
+                    <td>51.9 mm</td>
+                  </tr>
+                  <tr>
+                    <td><strong>7.0</strong></td>
+                    <td>O</td>
+                    <td>54 / 14</td>
+                    <td>17.3 mm</td>
+                    <td>54.4 mm</td>
+                  </tr>
+                  <tr>
+                    <td><strong>8.0</strong></td>
+                    <td>Q</td>
+                    <td>57 / 17</td>
+                    <td>18.1 mm</td>
+                    <td>57.0 mm</td>
+                  </tr>
+                  <tr>
+                    <td><strong>9.0</strong></td>
+                    <td>S</td>
+                    <td>59 / 19</td>
+                    <td>19.0 mm</td>
+                    <td>59.5 mm</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="sizing-card-footer">
+              <span>✦ Request our physical brass sizing gauge kit delivered to your residence.</span>
+            </div>
+          </div>
+
+          <!-- Atelier Care Card -->
+          <div class="care-card">
+            <div class="sizing-card-header">
+              <span class="guide-badge">CONSERVATION</span>
+              <h3>Haute Joaillerie Care Protocol</h3>
+              <p>Preserve the optical brilliance and metallurgical integrity of your heirloom.</p>
+            </div>
+            <div class="care-steps-list">
+              <div class="care-step-item">
+                <div class="care-step-num">01</div>
+                <div>
+                  <h4>Precious Metals & Gold Care</h4>
+                  <p>Clean 18K and 22K gold gently using lukewarm deionized water, mild non-abrasive soap, and a soft natural camel-hair brush. Avoid chemical dip cleansers.</p>
+                </div>
+              </div>
+              <div class="care-step-item">
+                <div class="care-step-num">02</div>
+                <div>
+                  <h4>Organic & Porous Gemstones</h4>
+                  <p>Emeralds, Pearls, and Opals require gentle ambient care. Never expose to ultrasonic cleaners or steam. Apply cosmetics and perfumes before adorning your jewellery.</p>
+                </div>
+              </div>
+              <div class="care-step-item">
+                <div class="care-step-num">03</div>
+                <div>
+                  <h4>Annual Maison Scintillation Audit</h4>
+                  <p>Our Place Vendôme and Geneva salons offer complimentary annual micro-prong audits, ultrasonic diamond bath treatments, and insurance appraisals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCIERGE / APPOINTMENT SECTION -->
+    <section id="concierge" class="content-section concierge-section">
+      <div class="section-container">
+        <div class="concierge-box">
+          <div class="concierge-content">
+            <span class="section-subtitle">PRIVATE APPOINTMENT</span>
+            <h2 class="section-title">Schedule a Private Salon Viewing</h2>
+            <p>Experience pieces from our Haute Joaillerie collection in person at our Geneva, Paris, Dubai, or Mumbai viewing salons, or request a private secure concierge consultation delivered to your residence.</p>
+            
+            <!-- FAST-TRACK WHATSAPP CONCIERGE BANNER -->
+            <div class="concierge-fast-track-wa">
+              <div class="fast-track-icon">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12.031 2c-5.513 0-9.99 4.477-9.99 9.99 0 1.76.459 3.477 1.332 4.996L2.05 22l5.176-1.358a9.96 9.96 0 0 0 4.805 1.233h.004c5.513 0 9.99-4.477 9.99-9.99A9.997 9.997 0 0 0 12.031 2zm0 18.283a8.28 8.28 0 0 1-4.22-1.151l-.303-.18-3.136.822.837-3.057-.197-.314a8.27 8.27 0 0 1-1.272-4.413c0-4.57 3.719-8.289 8.291-8.289 2.215 0 4.297.863 5.862 2.43a8.243 8.243 0 0 1 2.427 5.86c-.001 4.572-3.72 8.292-8.288 8.292zm4.542-6.205c-.249-.125-1.474-.727-1.703-.81-.228-.083-.395-.125-.561.125-.166.249-.644.81-.789.976-.145.166-.291.187-.54.062-.249-.125-1.052-.388-2.003-1.237-.74-.66-1.24-1.476-1.385-1.725-.145-.249-.015-.384.11-.508.112-.112.249-.291.374-.436.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.436-.062-.125-.561-1.35-.769-1.85-.202-.488-.408-.422-.561-.43-.145-.008-.312-.01-.478-.01s-.436.062-.664.312c-.228.249-.873.852-.873 2.078s.893 2.41 1.018 2.577c.125.166 1.758 2.685 4.26 3.766.595.257 1.06.411 1.423.526.598.19 1.142.163 1.572.099.479-.072 1.474-.602 1.682-1.184.208-.582.208-1.08.145-1.184-.063-.104-.229-.166-.478-.291z"/></svg>
+              </div>
+              <div class="fast-track-info">
+                <span class="fast-track-tag">DIRECT VIP MESSAGING</span>
+                <h4>Prefer Instant Encrypted WhatsApp Consultation?</h4>
+                <p>Connect live with our Place Vendôme Salon Jeweller for instant stone sourcing videos, certificate verification, and confidential acquisitions.</p>
+              </div>
+              <a href="https://wa.me/971501234567?text=Hello%20Atelier%20Lumi%C3%A8re%2C%20I%20would%20like%20to%20request%20an%20instant%20confidential%20consultation%20with%20a%20Private%20Jeweller." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-fast-track">
+                Chat on WhatsApp ↗
+              </a>
+            </div>
+
+            <!-- Selected Piece Highlight Banner -->
+            <div id="concierge-selection-banner" class="concierge-selection-banner hidden">
+              <span class="banner-icon">❖</span>
+              <div class="banner-details">
+                <span class="banner-label">INQUIRY SUBJECT:</span>
+                <span id="concierge-selected-title" class="banner-title">The Morganite Imperialis Collier</span>
+              </div>
+              <button type="button" id="btn-clear-selection" class="banner-clear-btn" title="Remove selected reference">&times;</button>
+            </div>
+
+            <form id="viewing-form" class="concierge-form">
+              <input type="hidden" id="concierge-item-ref" name="itemRef" value="">
+              
+              <div class="form-row">
+                <input type="text" id="concierge-name" name="fullName" placeholder="Full Name & Salutation" required>
+                <input type="email" id="concierge-email" name="email" placeholder="Confidential Email Address" required>
+              </div>
+
+              <div class="form-row">
+                <input type="tel" id="concierge-phone" name="phone" placeholder="Telephone / Encrypted Signal / WhatsApp">
+                <select id="concierge-salon" name="salon">
+                  <option value="paris">Salon Paris (Place Vendôme)</option>
+                  <option value="geneva">Salon Geneva (Rue du Rhône)</option>
+                  <option value="dubai">Salon Dubai (DIFC Private Vault)</option>
+                  <option value="mumbai">Salon Mumbai (Taj Mahal Palace)</option>
+                  <option value="private">Private Residence / Digital Atelier Salon</option>
+                </select>
+              </div>
+
+              <div class="form-row single-col">
+                <textarea id="concierge-message" name="message" rows="3" placeholder="Special requirements, bespoke requests, or preferred appointment dates..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary-large submit-btn">
+                Confirm Confidential Consultation Request
+              </button>
+              <div id="concierge-status-msg" class="concierge-status-msg hidden"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LUXURY FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-logo">❖ LUMIÈRE</span>
+          <p>Haute Joaillerie & High Art Objects</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h5>Collections</h5>
+            <a href="#collection">The Masterpiece Archive</a>
+            <a href="#hero-container">The Morganite Imperialis</a>
+            <a href="#atelier-bespoke">Bespoke Commissions</a>
+            <a href="#specifications">Gemological Dossier</a>
+          </div>
+          <div class="footer-col">
+            <h5>Maison</h5>
+            <a href="#craftsmanship">Atelier Heritage</a>
+            <a href="#gemology">Ethical Sourcing & 4Cs</a>
+            <a href="#concierge">Global Salons</a>
+          </div>
+          <div class="footer-col">
+            <h5>Client Services</h5>
+            <a href="#concierge">Private Salon Booking</a>
+            <a href="#atelier-bespoke">Custom Ring Studio</a>
+            <a href="#" id="footer-vault-link">Private Vault Portfolio</a>
+          </div>
+          <div class="footer-col">
+            <h5>Private Salons & VIP</h5>
+            <a href="https://wa.me/971501234567?text=Hello%20Atelier%20Lumi%C3%A8re%2C%20I%20would%20like%20to%20consult%20with%20a%20Private%20Jeweller." target="_blank" rel="noopener noreferrer">WhatsApp VIP Concierge</a>
+            <a href="#sizing-care">Ring Sizing & Care Guide</a>
+            <a href="#concierge">Place Vendôme Salon (Paris)</a>
+            <a href="#concierge">Geneva & Dubai Salons</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 LUMIÈRE ATELIER. All rights reserved. Registered High Jewellery Trademark.</p>
+        <p class="footer-meta">Curated High Joaillerie Catalog &bull; 60fps Scintillation Engine</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= PRIVATE CLIENT VAULT DRAWER ================= -->
+  <div id="vault-overlay" class="vault-overlay"></div>
+  <aside id="vault-drawer" class="vault-drawer" aria-hidden="true" role="dialog">
+    <div class="vault-header">
+      <div class="vault-title-wrap">
+        <span class="vault-crest">⚜</span>
+        <div>
+          <h3>Private Client Vault</h3>
+          <span class="vault-sub"><span id="vault-items-count">0</span> Creations Selected</span>
+        </div>
+      </div>
+      <button id="vault-close-btn" class="vault-close-btn" aria-label="Close Vault">&times;</button>
+    </div>
+
+    <!-- Vault Items List -->
+    <div id="vault-items-container" class="vault-body">
+      <!-- Dynamic cards injected via JS -->
+    </div>
+
+    <!-- Vault Empty State -->
+    <div id="vault-empty-state" class="vault-empty-state">
+      <div class="empty-icon">⚜</div>
+      <h4>Your Vault Is Empty</h4>
+      <p>Click the ⚜ icon on any jewellery creation to save it to your private salon portfolio.</p>
+      <a href="#collection" id="btn-browse-collection" class="btn-secondary-large">Explore Collection</a>
+    </div>
+
+    <!-- Vault Footer / Valuation Summary -->
+    <div class="vault-footer" id="vault-footer">
+      <div class="vault-total-row">
+        <span>Estimated Portfolio Valuation</span>
+        <span id="vault-total-price" class="vault-total-price">$0</span>
+      </div>
+      <p class="vault-note">Prices automatically converted to selected currency.</p>
+      <button type="button" id="btn-request-vault-viewing" class="btn-primary-large w-full">
+        Request Private Collective Salon Viewing
+      </button>
+      <button type="button" id="btn-clear-vault" class="btn-link-subtle">
+        Clear Vault Portfolio
+      </button>
+    </div>
+  </aside>
+
+  <!-- FLOATING LUXURY WHATSAPP VIP CONCIERGE -->
+  <a href="https://wa.me/971501234567?text=Hello%20Atelier%20Lumi%C3%A8re%2C%20I%20would%20like%20to%20consult%20with%20a%20Private%20Jeweller." target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" id="floating-whatsapp-btn" title="Chat with Private Jeweller on WhatsApp" aria-label="WhatsApp VIP Concierge">
+    <div class="whatsapp-btn-pulse"></div>
+    <div class="whatsapp-btn-inner">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="#ffffff"><path d="M12.031 2c-5.513 0-9.99 4.477-9.99 9.99 0 1.76.459 3.477 1.332 4.996L2.05 22l5.176-1.358a9.96 9.96 0 0 0 4.805 1.233h.004c5.513 0 9.99-4.477 9.99-9.99A9.997 9.997 0 0 0 12.031 2zm0 18.283a8.28 8.28 0 0 1-4.22-1.151l-.303-.18-3.136.822.837-3.057-.197-.314a8.27 8.27 0 0 1-1.272-4.413c0-4.57 3.719-8.289 8.291-8.289 2.215 0 4.297.863 5.862 2.43a8.243 8.243 0 0 1 2.427 5.86c-.001 4.572-3.72 8.292-8.288 8.292zm4.542-6.205c-.249-.125-1.474-.727-1.703-.81-.228-.083-.395-.125-.561.125-.166.249-.644.81-.789.976-.145.166-.291.187-.54.062-.249-.125-1.052-.388-2.003-1.237-.74-.66-1.24-1.476-1.385-1.725-.145-.249-.015-.384.11-.508.112-.112.249-.291.374-.436.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.436-.062-.125-.561-1.35-.769-1.85-.202-.488-.408-.422-.561-.43-.145-.008-.312-.01-.478-.01s-.436.062-.664.312c-.228.249-.873.852-.873 2.078s.893 2.41 1.018 2.577c.125.166 1.758 2.685 4.26 3.766.595.257 1.06.411 1.423.526.598.19 1.142.163 1.572.099.479-.072 1.474-.602 1.682-1.184.208-.582.208-1.08.145-1.184-.063-.104-.229-.166-.478-.291z"/></svg>
+      <span class="online-indicator"></span>
+    </div>
+    <span class="whatsapp-tooltip">Chat with Private Jeweller</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
